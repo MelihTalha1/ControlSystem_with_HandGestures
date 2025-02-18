@@ -82,7 +82,7 @@ model.compile(optimizer = "adam",
 
 callbacks = [
     EarlyStopping(monitor="val_loss", patience=5, restore_best_weights=True),
-    ModelCheckpoint("best_model.h5",monitor="val_loss", save_best_only=True)]
+    ModelCheckpoint("best_model.keras",monitor="val_loss", save_best_only=True)]
 # model training
 model.fit(
     train_generator,
@@ -92,7 +92,7 @@ model.fit(
     )
 
 # save model
-model.save("hand_gesture_model.h5")
+model.save("hand_gesture_model.keras")
 
 class_labels = list(train_generator.class_indices.keys())
 
@@ -105,7 +105,7 @@ command_map = {
 
 camera_index = int(input("Kullanılacak kamera indeksini girin (varsayılan: 0):") or 0)
 cap = cv2.VideoCapture(camera_index)
-model = load_model("hand_gesture_model.h5")
+model = load_model("hand_gesture_model.keras")
 
 while True:
     ret, frame = cap.read()
